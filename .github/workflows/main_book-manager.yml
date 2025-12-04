@@ -28,5 +28,4 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'book-manager'
-          slot-name: 'Production'
           package: .
