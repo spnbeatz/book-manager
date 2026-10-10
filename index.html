@@ -1,44 +1,189 @@
 <!doctype html>
 <html lang="pl">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Prosty Panel Zarządzania Księgarnią</title>
   <style>
-    :root{--bg:#f6f8fb;--card:#ffffff;--muted:#6b7280;--accent:#2563eb}
-    *{box-sizing:border-box}
-    body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; background:var(--bg); color:#0f172a}
-    header{background:linear-gradient(90deg,#0ea5e9, #6366f1); color:white; padding:20px 24px}
-    .wrap{max-width:1100px; margin:24px auto; padding:0 16px}
-    h1{margin:0;font-size:20px}
-    .grid{display:grid; grid-template-columns:1fr 380px; gap:20px}
-    .card{background:var(--card); padding:16px; border-radius:12px; box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --accent: #2563eb
+    }
 
-    form .row{display:flex; gap:8px; margin-bottom:8px}
-    label{font-size:13px; color:var(--muted); display:block; margin-bottom:6px}
-    input, select{width:100%; padding:8px 10px; border-radius:8px; border:1px solid #e6edf3}
-    button{background:var(--accent); color:white; padding:8px 12px; border-radius:8px; border:0; cursor:pointer}
-    button.ghost{background:transparent; color:var(--accent); border:1px solid #dbeafe}
-    .controls{display:flex; gap:8px; align-items:center; margin-bottom:12px}
-    .search{flex:1}
-    table{width:100%; border-collapse:collapse; font-size:14px}
-    th,td{padding:8px 6px; text-align:left; border-bottom:1px solid #f1f5f9}
-    th{font-size:12px; color:var(--muted)}
-    .small{font-size:13px; color:var(--muted)}
-    .actions button{margin-right:6px}
-    .empty{padding:20px; text-align:center; color:var(--muted)}
-    .toolbar{display:flex; gap:8px; flex-wrap:wrap}
-    .badge{background:#eef2ff; color:#3730a3; padding:6px 10px; border-radius:999px; font-size:13px}
-    footer{max-width:1100px;margin:10px auto 60px;padding:0 16px;color:var(--muted);font-size:13px}
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      margin: 0;
+      background: var(--bg);
+      color: #0f172a
+    }
+
+    header {
+      background: linear-gradient(90deg, #0ea5e9, #6366f1);
+      color: white;
+      padding: 20px 24px
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 20px
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 20px
+    }
+
+    .card {
+      background: var(--card);
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(2, 6, 23, 0.06)
+    }
+
+    form .row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px
+    }
+
+    label {
+      font-size: 13px;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 6px
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #e6edf3
+    }
+
+    button {
+      background: var(--accent);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 0;
+      cursor: pointer
+    }
+
+    button.ghost {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid #dbeafe
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px
+    }
+
+    .search {
+      flex: 1
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px
+    }
+
+    th,
+    td {
+      padding: 8px 6px;
+      text-align: left;
+      border-bottom: 1px solid #f1f5f9
+    }
+
+    th {
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    .small {
+      font-size: 13px;
+      color: var(--muted)
+    }
+
+    .actions button {
+      margin-right: 6px
+    }
+
+    .empty {
+      padding: 20px;
+      text-align: center;
+      color: var(--muted)
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap
+    }
+
+    .badge {
+      background: #eef2ff;
+      color: #3730a3;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 13px
+    }
+
+    footer {
+      max-width: 1100px;
+      margin: 10px auto 60px;
+      padding: 0 16px;
+      color: var(--muted);
+      font-size: 13px
+    }
+
     /* modal */
-    .modal{position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(2,6,23,0.4);}
-    .modal .box{width:600px; max-width:95%;}
-    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(2, 6, 23, 0.4);
+    }
+
+    .modal .box {
+      width: 600px;
+      max-width: 95%;
+    }
+
+    @media (max-width:900px) {
+      .grid {
+        grid-template-columns: 1fr
+      }
+    }
   </style>
 </head>
+
 <body>
   <header>
-    <div class="wrap"><h1>Prosty panel zarządzania księgarnią</h1></div>
+    <div class="wrap">
+      <h1>Prosty panel zarządzania księgarnią</h1>
+    </div>
   </header>
 
   <main class="wrap">
@@ -66,7 +211,8 @@
             <div class="toolbar">
               <button id="btnSample" class="ghost">Dodaj przykładowe</button>
               <button id="btnExport" class="ghost">Eksportuj JSON</button>
-              <label class="ghost" style="padding:6px 10px; border-radius:8px; cursor:pointer"><input id="fileImport" type="file" accept="application/json" style="display:none"/>Importuj</label>
+              <label class="ghost" style="padding:6px 10px; border-radius:8px; cursor:pointer"><input id="fileImport"
+                  type="file" accept="application/json" style="display:none" />Importuj</label>
               <button id="btnClear" class="ghost">Wyczyść wszystko</button>
             </div>
           </div>
@@ -74,10 +220,21 @@
 
         <div id="listWrap" class="card" style="padding:8px 12px">
           <table id="booksTable">
-            <thead><tr><th>Tytuł</th><th>Autor</th><th>Rok</th><th>ISBN</th><th>Ilość</th><th style="width:120px">Cena</th><th></th></tr></thead>
+            <thead>
+              <tr>
+                <th>Tytuł</th>
+                <th>Autor</th>
+                <th>Rok</th>
+                <th>ISBN</th>
+                <th>Ilość</th>
+                <th style="width:120px">Cena</th>
+                <th></th>
+              </tr>
+            </thead>
             <tbody id="booksTbody"></tbody>
           </table>
-          <div id="empty" class="empty" style="display:none">Brak książek. Dodaj pierwszą książkę po prawej stronie.</div>
+          <div id="empty" class="empty" style="display:none">Brak książek. Dodaj pierwszą książkę po prawej stronie.
+          </div>
         </div>
       </section>
 
@@ -123,7 +280,8 @@
     </div>
   </main>
 
-  <footer>Plik HTML samodzielnie działa w przeglądarce. Dane są przechowywane lokalnie w <code>localStorage</code>.</footer>
+  <footer>Plik HTML samodzielnie działa w przeglądarce. Dane są przechowywane lokalnie w <code>localStorage</code>.
+  </footer>
 
   <!-- Edycja modal -->
   <div id="modal" style="display:none" class="modal">
@@ -156,64 +314,72 @@
       </form>
     </div>
   </div>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X3S65WQ6EQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
+    gtag('config', 'G-X3S65WQ6EQ');
+  </script>
   <script>
     const LS_KEY = 'bookstore_books_v1';
 
     // utilities
-    const uid = ()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+    const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
     const $ = id => document.getElementById(id);
 
     // state
     let books = []; // {id,title,author,year,isbn,qty,price,added}
 
     // load
-    function load(){
-      try{books = JSON.parse(localStorage.getItem(LS_KEY))||[]}catch(e){books=[]}
+    function load() {
+      try { books = JSON.parse(localStorage.getItem(LS_KEY)) || [] } catch (e) { books = [] }
       renderList();
     }
 
-    function save(){ localStorage.setItem(LS_KEY, JSON.stringify(books)); renderList(); }
+    function save() { localStorage.setItem(LS_KEY, JSON.stringify(books)); renderList(); }
 
-    function renderList(){
-      const tbody = $('booksTbody'); tbody.innerHTML='';
+    function renderList() {
+      const tbody = $('booksTbody'); tbody.innerHTML = '';
       const q = $('search').value.trim().toLowerCase();
       const filter = $('filter').value; const sort = $('sort').value;
 
-      let filtered = books.filter(b=>{
-        if(filter==='in-stock' && (!b.qty || b.qty<=0)) return false;
-        if(filter==='out' && b.qty>0) return false;
-        if(!q) return true;
-        return (b.title||'').toLowerCase().includes(q) || (b.author||'').toLowerCase().includes(q) || (b.isbn||'').toLowerCase().includes(q);
+      let filtered = books.filter(b => {
+        if (filter === 'in-stock' && (!b.qty || b.qty <= 0)) return false;
+        if (filter === 'out' && b.qty > 0) return false;
+        if (!q) return true;
+        return (b.title || '').toLowerCase().includes(q) || (b.author || '').toLowerCase().includes(q) || (b.isbn || '').toLowerCase().includes(q);
       });
 
       // sort
-      if(sort==='titleAsc') filtered.sort((a,b)=>a.title.localeCompare(b.title));
-      else if(sort==='titleDesc') filtered.sort((a,b)=>b.title.localeCompare(a.title));
-      else if(sort==='priceAsc') filtered.sort((a,b)=>a.price - b.price);
-      else if(sort==='priceDesc') filtered.sort((a,b)=>b.price - a.price);
-      else filtered.sort((a,b)=>b.added - a.added);
+      if (sort === 'titleAsc') filtered.sort((a, b) => a.title.localeCompare(b.title));
+      else if (sort === 'titleDesc') filtered.sort((a, b) => b.title.localeCompare(a.title));
+      else if (sort === 'priceAsc') filtered.sort((a, b) => a.price - b.price);
+      else if (sort === 'priceDesc') filtered.sort((a, b) => b.price - a.price);
+      else filtered.sort((a, b) => b.added - a.added);
 
-      if(filtered.length===0){ $('empty').style.display='block'; $('booksTable').style.display='none'; }
-      else{ $('empty').style.display='none'; $('booksTable').style.display='table'; }
+      if (filtered.length === 0) { $('empty').style.display = 'block'; $('booksTable').style.display = 'none'; }
+      else { $('empty').style.display = 'none'; $('booksTable').style.display = 'table'; }
 
-      filtered.forEach(b=>{
+      filtered.forEach(b => {
         const tr = document.createElement('tr');
-        tr.innerHTML = `<td><strong>${escapeHtml(b.title)}</strong><div class="small">${escapeHtml(b.author||'')}</div></td>
-                        <td>${escapeHtml(b.author||'')}</td>
-                        <td class="small">${b.year||''}</td>
-                        <td class="small">${escapeHtml(b.isbn||'')}</td>
+        tr.innerHTML = `<td><strong>${escapeHtml(b.title)}</strong><div class="small">${escapeHtml(b.author || '')}</div></td>
+                        <td>${escapeHtml(b.author || '')}</td>
+                        <td class="small">${b.year || ''}</td>
+                        <td class="small">${escapeHtml(b.isbn || '')}</td>
                         <td>${b.qty}</td>
                         <td>${Number(b.price).toFixed(2)} zł</td>
                         <td class="actions"><button class="ghost" onclick="openEdit('${b.id}')">Edytuj</button><button class="ghost" onclick="removeBook('${b.id}')">Usuń</button></td>`;
         tbody.appendChild(tr);
       });
 
-      $('count').textContent = books.length + (books.length===1? ' książka' : ' książek');
+      $('count').textContent = books.length + (books.length === 1 ? ' książka' : ' książek');
     }
 
     // add
-    $('addForm').addEventListener('submit', e=>{
+    $('addForm').addEventListener('submit', e => {
       e.preventDefault();
       const book = {
         id: uid(),
@@ -225,69 +391,70 @@
         price: Number($('price').value) || 0,
         added: Date.now()
       };
-      if(!book.title){ alert('Podaj tytuł'); return }
+      if (!book.title) { alert('Podaj tytuł'); return }
       books.push(book); save(); $('addForm').reset();
     });
 
-    $('btnReset').addEventListener('click', ()=>$('addForm').reset());
+    $('btnReset').addEventListener('click', () => $('addForm').reset());
     $('search').addEventListener('input', renderList);
     $('filter').addEventListener('change', renderList);
     $('sort').addEventListener('change', renderList);
 
     // edit
-    function openEdit(id){
-      const b = books.find(x=>x.id===id); if(!b) return;
-      $('editId').value = b.id; $('editTitle').value=b.title; $('editAuthor').value=b.author; $('editYear').value=b.year||''; $('editQty').value=b.qty; $('editIsbn').value=b.isbn; $('editPrice').value=b.price;
-      $('modal').style.display='flex';
+    function openEdit(id) {
+      const b = books.find(x => x.id === id); if (!b) return;
+      $('editId').value = b.id; $('editTitle').value = b.title; $('editAuthor').value = b.author; $('editYear').value = b.year || ''; $('editQty').value = b.qty; $('editIsbn').value = b.isbn; $('editPrice').value = b.price;
+      $('modal').style.display = 'flex';
     }
     window.openEdit = openEdit;
 
-    $('modalClose').addEventListener('click', ()=>$('modal').style.display='none');
-    $('editForm').addEventListener('submit', e=>{
+    $('modalClose').addEventListener('click', () => $('modal').style.display = 'none');
+    $('editForm').addEventListener('submit', e => {
       e.preventDefault();
-      const id = $('editId').value; const b = books.find(x=>x.id===id); if(!b) return;
-      b.title = $('editTitle').value.trim(); b.author = $('editAuthor').value.trim(); b.year = Number($('editYear').value)||null; b.qty = Number($('editQty').value)||0; b.isbn = $('editIsbn').value.trim(); b.price = Number($('editPrice').value)||0;
-      save(); $('modal').style.display='none';
+      const id = $('editId').value; const b = books.find(x => x.id === id); if (!b) return;
+      b.title = $('editTitle').value.trim(); b.author = $('editAuthor').value.trim(); b.year = Number($('editYear').value) || null; b.qty = Number($('editQty').value) || 0; b.isbn = $('editIsbn').value.trim(); b.price = Number($('editPrice').value) || 0;
+      save(); $('modal').style.display = 'none';
     });
 
     // remove
-    function removeBook(id){ if(!confirm('Usunąć tę książkę?')) return; books=books.filter(b=>b.id!==id); save(); }
+    function removeBook(id) { if (!confirm('Usunąć tę książkę?')) return; books = books.filter(b => b.id !== id); save(); }
     window.removeBook = removeBook;
 
     // sample, clear, import/export
-    $('btnSample').addEventListener('click', ()=>{
+    $('btnSample').addEventListener('click', () => {
       const sample = [
-        {id:uid(), title:'Lalka', author:'Bolesław Prus', year:1890, isbn:'978-83-01-001', qty:5, price:39.90, added:Date.now()},
-        {id:uid(), title:'Zbrodnia i kara', author:'Fiodor Dostojewski', year:1866, isbn:'978-83-02-002', qty:2, price:49.00, added:Date.now()-1000},
-        {id:uid(), title:'Mały Książę', author:'Antoine de Saint-Exupéry', year:1943, isbn:'978-83-03-003', qty:0, price:29.50, added:Date.now()-2000}
+        { id: uid(), title: 'Lalka', author: 'Bolesław Prus', year: 1890, isbn: '978-83-01-001', qty: 5, price: 39.90, added: Date.now() },
+        { id: uid(), title: 'Zbrodnia i kara', author: 'Fiodor Dostojewski', year: 1866, isbn: '978-83-02-002', qty: 2, price: 49.00, added: Date.now() - 1000 },
+        { id: uid(), title: 'Mały Książę', author: 'Antoine de Saint-Exupéry', year: 1943, isbn: '978-83-03-003', qty: 0, price: 29.50, added: Date.now() - 2000 }
       ];
       books = books.concat(sample); save();
     });
 
-    $('btnClear').addEventListener('click', ()=>{
-      if(confirm('Usunąć WSZYSTKIE dane?')){ books=[]; save(); }
+    $('btnClear').addEventListener('click', () => {
+      if (confirm('Usunąć WSZYSTKIE dane?')) { books = []; save(); }
     });
 
-    $('btnExport').addEventListener('click', ()=>{
-      const blob = new Blob([JSON.stringify(books, null, 2)], {type:'application/json'});
-      const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='bookstore_export.json'; a.click(); URL.revokeObjectURL(url);
+    $('btnExport').addEventListener('click', () => {
+      const blob = new Blob([JSON.stringify(books, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'bookstore_export.json'; a.click(); URL.revokeObjectURL(url);
     });
 
-    $('fileImport').addEventListener('change', (e)=>{
-      const file = e.target.files[0]; if(!file) return;
+    $('fileImport').addEventListener('change', (e) => {
+      const file = e.target.files[0]; if (!file) return;
       const reader = new FileReader();
-      reader.onload = ()=>{
-        try{ const data = JSON.parse(reader.result); if(Array.isArray(data)) { books = books.concat(data.map(d=>({...d, id: d.id||uid()}))); save(); alert('Import zakończony.'); } else alert('Plik nie zawiera listy książek'); }
-        catch(err){ alert('Błąd przy odczycie pliku'); }
+      reader.onload = () => {
+        try { const data = JSON.parse(reader.result); if (Array.isArray(data)) { books = books.concat(data.map(d => ({ ...d, id: d.id || uid() }))); save(); alert('Import zakończony.'); } else alert('Plik nie zawiera listy książek'); }
+        catch (err) { alert('Błąd przy odczycie pliku'); }
       };
       reader.readAsText(file);
-      e.target.value='';
+      e.target.value = '';
     });
 
-    function escapeHtml(str){ if(!str) return ''; return String(str).replace(/[&<>"']/g, s=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[s])); }
+    function escapeHtml(str) { if (!str) return ''; return String(str).replace(/[&<>"']/g, s => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[s])); }
 
     // init
     load();
   </script>
 </body>
+
 </html>
