@@ -6,7 +6,7 @@ import {
     filterBooks,
     search,
     importBooks
-} from "./gtm_events";
+} from "./gtm_events.js";
 
 const LS_KEY = 'bookstore_books_v1';
 
